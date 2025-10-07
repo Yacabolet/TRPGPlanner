@@ -1,0 +1,55 @@
+/* === FORM GROUPS (RADIO & CHECKBOX) === */
+
+.radio-group,
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.radio-option,
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 20px;
+    background: rgba(244, 228, 193, 0.05);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.radio-option:hover,
+.checkbox-option:hover {
+    background: rgba(244, 228, 193, 0.1);
+    border-color: rgba(218, 165, 32, 0.3);
+}
+
+.radio-option.selected,
+.checkbox-option.selected {
+    background: rgba(218, 165, 32, 0.1);
+    border-color: #DAA520;
+}
+
+.radio-option input,
+.checkbox-option input {
+    width: auto;
+    margin: 0;
+    transform: scale(1.3);
+}
+
+.radio-option label,
+.checkbox-option label {
+    cursor: pointer;
+    flex: 1;
+    margin-bottom: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}

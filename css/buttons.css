@@ -1,0 +1,37 @@
+/* === BUTTONS === */
+
+.nav-btn {
+    background: linear-gradient(45deg, #DAA520, #B8860B);
+    color: #2c1810;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-btn:hover {
+    background: linear-gradient(45deg, #B8860B, #DAA520);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(218, 165, 32, 0.3);
+}
+
+.nav-btn:disabled {
+    background: #666;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.nav-btn.secondary {
+    background: rgba(139, 69, 19, 0.8);
+    color: #f4e4c1;
+}
+
+.nav-btn.secondary:hover {
+    background: rgba(139, 69, 19, 1);
+}

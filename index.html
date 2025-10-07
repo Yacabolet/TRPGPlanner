@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Recruitment Form</title>
+    <!-- Load CSS modules -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/form-elements.css">
+    <link rel="stylesheet" href="css/form-groups.css">
+    <link rel="stylesheet" href="css/timeslots.css">
+    <link rel="stylesheet" href="css/ratings.css">
+    <link rel="stylesheet" href="css/characters.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/messages.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Player Recruitment Form</h1>
+            <div class="description">
+                Thank you for taking the time to fill out this form! I'm trying to gauge interest and align schedules to organize a Tabletop RPG so your participation is much appreciated!
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">Step 1 of 7</div>
+            <div class="auto-save-indicator">Progress automatically saved</div>
+        </div>
+
+        <form id="recruitmentForm">
+            <!-- Page 1: Basic Information -->
+            <div class="form-page active" id="page1">
+                <h2>Basic Information</h2>
+                
+                <div class="form-group required">
+                    <label for="preferredName">Preferred Name</label>
+                    <input type="text" id="preferredName" name="preferredName" placeholder="What would you like to be referred to as in text or voice chat?" required>
+                </div>
+                
+                <div class="form-group required">
+                    <label for="pronouns">Pronouns</label>
+                    <input type="text" id="pronouns" name="pronouns" placeholder="For example: She/Her, He/Him, They/Them, etc." required>
+                </div>
+                
+                <div class="form-group required">
+                    <label for="discordUsername">Discord Username</label>
+                    <input type="text" id="discordUsername" name="discordUsername" placeholder="For example, mine is adygenie." required>
+                    <div id="userCheckStatus" style="margin-top: 10px; font-size: 0.9em; display: none;"></div>
+                </div>
+            </div>
+
+            <!-- Page 2: Timeslot Availability -->
+            <div class="form-page" id="page2">
+                <h2>Timeslot Availability</h2>
+                
+                <div class="timezone-display" id="timezoneDisplay">
+                    Detecting your timezone...
+                </div>
+                
+                <div class="timezone-override">
+                    <label for="timezoneOverride">If incorrect, manually select your timezone:</label>
+                    <input type="text" id="timezoneSearch" placeholder="Type to search timezones or enter UTC offset (e.g. UTC+2)" style="margin-bottom: 10px;">
+                    <select id="timezoneOverride" name="timezone" size="1">
+                        <option value="">Use detected timezone</option>
+                    </select>
+                    <div class="note">You can type to search for your timezone, or enter a UTC offset like "UTC+2" or "UTC-5"</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Select your availability for each 4-hour session:</label>
+                    <div class="timeslot-grid" id="timeslotGrid">
+                        <!-- Timeslots will be populated by JavaScript -->
+                    </div>
+                    <div class="note" style="margin-top: 15px;">
+                        Sessions are 4 hours long. The flexibility options let you indicate if you could accommodate the session starting 1 hour earlier or later, though the listed time is preferred.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 3: TTRPG Experience -->
+            <div class="form-page" id="page3">
+                <h2>TTRPG Experience</h2>
+                
+                <div class="form-group">
+                    <label>Have you played any TTRPG related Videogames (EG; Baldur's Gate 3, Wrath of the Righteous, Kingmaker)?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="videogames_yes" name="videogames" value="yes">
+                            <label for="videogames_yes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="videogames_no" name="videogames" value="no">
+                            <label for="videogames_no">No</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Have you watched any Live Play TTRPG shows? (EG; Critical Role, Dimension 20)</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="liveplay_yes" name="liveplay" value="yes">
+                            <label for="liveplay_yes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="liveplay_no" name="liveplay" value="no">
+                            <label for="liveplay_no">No</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Have you engaged in any Roleplaying via Text chat before?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="textRP_yes" name="textRP" value="yes">
+                            <label for="textRP_yes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="textRP_no" name="textRP" value="no">
+                            <label for="textRP_no">No</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Have you engaged in any Roleplaying via Voice chat before?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="voiceRP_yes" name="voiceRP" value="yes">
+                            <label for="voiceRP_yes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="voiceRP_no" name="voiceRP" value="no">
+                            <label for="voiceRP_no">No</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Have you played in a TTRPG before?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="ttrpg_never" name="ttrpgExperience" value="never">
+                            <label for="ttrpg_never">Never</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="ttrpg_once" name="ttrpgExperience" value="once">
+                            <label for="ttrpg_once">Once</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="ttrpg_few" name="ttrpgExperience" value="few">
+                            <label for="ttrpg_few">Few Sessions</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="ttrpg_campaign" name="ttrpgExperience" value="campaign">
+                            <label for="ttrpg_campaign">Full Campaign</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="ttrpg_multiple" name="ttrpgExperience" value="multiple">
+                            <label for="ttrpg_multiple">Multiple Campaigns</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="systemsPlayed">If you have played in a TTRPG before, or have familiarity with the rulesets of certain TTRPGs, please list them here:</label>
+                    <textarea id="systemsPlayed" name="systemsPlayed" placeholder="e.g; D&D 5e, Pathfinder 1e, Call of Cthulhu" rows="3"></textarea>
+                </div>
+            </div>
+
+            <!-- Page 4: Player Motivation & Style -->
+            <div class="form-page" id="page4">
+                <h2>Player Motivation & Style</h2>
+                
+                <div class="form-group">
+                    <label>What excites you most about TTRPGs? (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="excitement_combat" name="excitement" value="combat">
+                            <label for="excitement_combat">Combat and tactical challenges</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="excitement_exploration" name="excitement" value="exploration">
+                            <label for="excitement_exploration">Exploration and puzzles</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="excitement_roleplay" name="excitement" value="roleplay">
+                            <label for="excitement_roleplay">Social roleplay and character interactions</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="excitement_character" name="excitement" value="character">
+                            <label for="excitement_character">Character development and growth</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="excitement_storytelling" name="excitement" value="storytelling">
+                            <label for="excitement_storytelling">Collaborative storytelling</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerStrength">What's one strength you bring to a gaming group?</label>
+                    <textarea id="playerStrength" name="playerStrength" placeholder="e.g., good at strategy, creative problem-solving, stays in character, helps others, etc." rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Preferred roleplay style</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="roleplay_acting" name="roleplayStyle" value="full_acting">
+                            <label for="roleplay_acting">I like acting out every scene as the character, speaking in character voice</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="roleplay_partial" name="roleplayStyle" value="partial_acting">
+                            <label for="roleplay_partial">I enjoy some character voice and acting, but not for every interaction</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="roleplay_mixed" name="roleplayStyle" value="mixed">
+                            <label for="roleplay_mixed">I'm comfortable with either approach depending on the moment</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="roleplay_mostly_describe" name="roleplayStyle" value="mostly_describe">
+                            <label for="roleplay_mostly_describe">I prefer to mostly describe my actions with occasional character dialogue</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="roleplay_describe" name="roleplayStyle" value="describe_only">
+                            <label for="roleplay_describe">I prefer to describe my character's actions without acting them out</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>How much narrative control do you like having in the story?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="narrative_low" name="narrativeControl" value="low">
+                            <label for="narrative_low">I prefer to follow the GM's story and react to it</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="narrative_medium" name="narrativeControl" value="medium">
+                            <label for="narrative_medium">I like some input on story direction and world details</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="narrative_high" name="narrativeControl" value="high">
+                            <label for="narrative_high">I enjoy actively helping to shape the story and world</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Do you enjoy writing session recaps or keeping notes about game events?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="recap_love" name="sessionRecaps" value="love">
+                            <label for="recap_love">Yes, I love documenting our adventures</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="recap_willing" name="sessionRecaps" value="willing">
+                            <label for="recap_willing">I'd be willing to help with this occasionally</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="recap_neutral" name="sessionRecaps" value="neutral">
+                            <label for="recap_neutral">I'm neutral about it</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="recap_prefer_not" name="sessionRecaps" value="prefer_not">
+                            <label for="recap_prefer_not">I'd prefer others handle this</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 5: Safety & Boundaries -->
+            <div class="form-page" id="page5">
+                <h2>Safety & Boundaries</h2>
+                
+                <div class="form-group">
+                    <label for="contentAvoid">Are there any topics, themes, or content you'd prefer to avoid in the game?</label>
+                    <textarea id="contentAvoid" name="contentAvoid" placeholder="This information is kept private and only used to ensure everyone's comfort. Leave blank if nothing specific comes to mind." rows="4"></textarea>
+                    <div class="note">This information is private and will only be seen by the GM to ensure a comfortable experience for everyone.</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>If something makes you uncomfortable during a session, how would you prefer to handle it? (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="safety_speak_up" name="safetyMethods" value="speak_up">
+                            <label for="safety_speak_up">Speak up immediately in the group</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="safety_private_message" name="safetyMethods" value="private_message">
+                            <label for="safety_private_message">Send a private message to the GM</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="safety_code_word" name="safetyMethods" value="code_word">
+                            <label for="safety_code_word">Use a predetermined code word or phrase</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="safety_after_session" name="safetyMethods" value="after_session">
+                            <label for="safety_after_session">Discuss it with the GM after the session</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group required">
+                    <label>Player character vs player character conflict</label>
+                    <div class="dual-rating">
+                        <div class="rating-section">
+                            <h4>Social Conflict</h4>
+                            <div class="rating-labels">
+                                <span>Avoid</span>
+                                <span>Embrace</span>
+                            </div>
+                            <div class="rating-inputs">
+                                <label><input type="radio" name="pvpSocial" value="1" required> 1</label>
+                                <label><input type="radio" name="pvpSocial" value="2"> 2</label>
+                                <label><input type="radio" name="pvpSocial" value="3"> 3</label>
+                                <label><input type="radio" name="pvpSocial" value="4"> 4</label>
+                                <label><input type="radio" name="pvpSocial" value="5"> 5</label>
+                            </div>
+                        </div>
+                        <div class="rating-section">
+                            <h4>Combat</h4>
+                            <div class="rating-labels">
+                                <span>Avoid</span>
+                                <span>Embrace</span>
+                            </div>
+                            <div class="rating-inputs">
+                                <label><input type="radio" name="pvpCombat" value="1" required> 1</label>
+                                <label><input type="radio" name="pvpCombat" value="2"> 2</label>
+                                <label><input type="radio" name="pvpCombat" value="3"> 3</label>
+                                <label><input type="radio" name="pvpCombat" value="4"> 4</label>
+                                <label><input type="radio" name="pvpCombat" value="5"> 5</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 6: Character Preferences -->
+            <div class="form-page" id="page6">
+                <h2>Character Preferences</h2>
+                
+                <div class="form-group">
+                    <label>Character creation preference</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="char_create" name="characterCreation" value="create">
+                            <label for="char_create">I want to create my own character</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="char_premade" name="characterCreation" value="premade">
+                            <label for="char_premade">I'd like to browse the premade character options</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="char_either" name="characterCreation" value="either">
+                            <label for="char_either">Either option is fine with me</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>What type of character role interests you most? (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="role_leader" name="characterRoles" value="leader">
+                            <label for="role_leader">Leader - guides the group and makes plans</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="role_support" name="characterRoles" value="support">
+                            <label for="role_support">Support - helps and heals teammates</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="role_damage" name="characterRoles" value="damage">
+                            <label for="role_damage">Damage dealer - focuses on taking out enemies</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="role_tank" name="characterRoles" value="tank">
+                            <label for="role_tank">Tank - protects allies and draws enemy attention</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="role_problem_solver" name="characterRoles" value="problem_solver">
+                            <label for="role_problem_solver">Problem solver - handles puzzles and obstacles</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="role_face" name="characterRoles" value="face">
+                            <label for="role_face">Face/Social - handles negotiations and interactions</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="role_scout" name="characterRoles" value="scout">
+                            <label for="role_scout">Scout - explores and gathers information</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 7: Character Browse (Conditional) -->
+            <div class="form-page" id="page7">
+                <h2>Browse Premade Characters</h2>
+                
+                <p style="margin-bottom: 20px;">Here are the available premade characters. You can select your preferences, or leave all unselected if none particularly interest you.</p>
+                
+                <div class="character-grid" id="characterGrid">
+                    <div class="character-placeholder">
+                        Premade character options will be displayed here once you provide the character details.
+                        <br><br>
+                        For now, this page serves as a placeholder to demonstrate the workflow.
+                    </div>
+                </div>
+                
+                <div class="note" style="margin-top: 20px;">
+                    You can select multiple characters that interest you, or proceed without selections if you'd prefer to create your own character after all.
+                </div>
+            </div>
+
+            <!-- Page 8: Preferences and Expectations -->
+            <div class="form-page" id="page8">
+                <h2>Preferences and Expectations</h2>
+                <p style="margin-bottom: 25px; opacity: 0.9;">Please rank the following on a 1-5 scale:</p>
+                
+                <div class="form-group required">
+                    <label>Expected attentiveness during sessions</label>
+                    <div class="rating-labels">
+                        <span>Easily Distracted</span>
+                        <span>Mostly Focused</span>
+                    </div>
+                    <div class="rating-inputs">
+                        <label><input type="radio" name="attentiveness" value="1" required> 1</label>
+                        <label><input type="radio" name="attentiveness" value="2"> 2</label>
+                        <label><input type="radio" name="attentiveness" value="3"> 3</label>
+                        <label><input type="radio" name="attentiveness" value="4"> 4</label>
+                        <label><input type="radio" name="attentiveness" value="5"> 5</label>
+                    </div>
+                </div>
+                
+                <div class="form-group required">
+                    <label>Comedic roleplaying</label>
+                    <div class="rating-labels">
+                        <span>Avoid</span>
+                        <span>Prefer</span>
+                    </div>
+                    <div class="rating-inputs">
+                        <label><input type="radio" name="comedy" value="1" required> 1</label>
+                        <label><input type="radio" name="comedy" value="2"> 2</label>
+                        <label><input type="radio" name="comedy" value="3"> 3</label>
+                        <label><input type="radio" name="comedy" value="4"> 4</label>
+                        <label><input type="radio" name="comedy" value="5"> 5</label>
+                    </div>
+                </div>
+                
+                <div class="form-group required">
+                    <label>Dramatic roleplaying</label>
+                    <div class="rating-labels">
+                        <span>Avoid</span>
+                        <span>Prefer</span>
+                    </div>
+                    <div class="rating-inputs">
+                        <label><input type="radio" name="drama" value="1" required> 1</label>
+                        <label><input type="radio" name="drama" value="2"> 2</label>
+                        <label><input type="radio" name="drama" value="3"> 3</label>
+                        <label><input type="radio" name="drama" value="4"> 4</label>
+                        <label><input type="radio" name="drama" value="5"> 5</label>
+                    </div>
+                </div>
+                
+                <div class="form-group required">
+                    <label>Preferred ESRB rating for RP <a href="https://www.esrb.org/ratings-guide/" target="_blank" style="color: #DAA520; text-decoration: underline;">(ratings guide)</a></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="esrb_e" name="esrbRating" value="E" required>
+                            <label for="esrb_e">E - Everyone</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="esrb_e10" name="esrbRating" value="E10+">
+                            <label for="esrb_e10">E10+ - Everyone 10 and older</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="esrb_t" name="esrbRating" value="T">
+                            <label for="esrb_t">T - Teen</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="esrb_m" name="esrbRating" value="M">
+                            <label for="esrb_m">M - Mature 17+</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="esrb_a" name="esrbRating" value="A">
+                            <label for="esrb_a">A - Adults Only 18+</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group required">
+                    <label>Voice communication during Sessions</label>
+                    <div class="rating-labels">
+                        <span>Avoid</span>
+                        <span>Prefer</span>
+                    </div>
+                    <div class="rating-inputs">
+                        <label><input type="radio" name="voiceComm" value="1" required> 1</label>
+                        <label><input type="radio" name="voiceComm" value="2"> 2</label>
+                        <label><input type="radio" name="voiceComm" value="3"> 3</label>
+                        <label><input type="radio" name="voiceComm" value="4"> 4</label>
+                        <label><input type="radio" name="voiceComm" value="5"> 5</label>
+                    </div>
+                </div>
+                
+                <div class="form-group required">
+                    <label>Text communication during Sessions</label>
+                    <div class="rating-labels">
+                        <span>Avoid</span>
+                        <span>Prefer</span>
+                    </div>
+                    <div class="rating-inputs">
+                        <label><input type="radio" name="textComm" value="1" required> 1</label>
+                        <label><input type="radio" name="textComm" value="2"> 2</label>
+                        <label><input type="radio" name="textComm" value="3"> 3</label>
+                        <label><input type="radio" name="textComm" value="4"> 4</label>
+                        <label><input type="radio" name="textComm" value="5"> 5</label>
+                    </div>
+                </div>
+                
+                <div class="form-group required">
+                    <label>Being in the spotlight</label>
+                    <div class="rating-labels">
+                        <span>Avoid</span>
+                        <span>Prefer</span>
+                    </div>
+                    <div class="rating-inputs">
+                        <label><input type="radio" name="spotlight" value="1" required> 1</label>
+                        <label><input type="radio" name="spotlight" value="2"> 2</label>
+                        <label><input type="radio" name="spotlight" value="3"> 3</label>
+                        <label><input type="radio" name="spotlight" value="4"> 4</label>
+                        <label><input type="radio" name="spotlight" value="5"> 5</label>
+                    </div>
+                </div>
+                
+                <div class="form-group" id="doubleSessionGroup" style="display: none;">
+                    <label>Would you be open to having two sessions in some weeks, on a case-by-case basis?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="double_yes" name="doubleSessions" value="yes">
+                            <label for="double_yes">Yes, I'd be open to it</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="double_maybe" name="doubleSessions" value="maybe">
+                            <label for="double_maybe">Maybe, depending on the week</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="double_no" name="doubleSessions" value="no">
+                            <label for="double_no">No, I prefer one session per week maximum</label>
+                        </div>
+                    </div>
+                    <div class="note">This would only happen occasionally when schedules align well for the group.</div>
+                </div>
+            </div>
+
+            <!-- Final Page: Thank You -->
+            <div class="form-page" id="finalPage">
+                <div class="final-message" id="finalMessage">
+                    Thank you once again for your time! I will be in touch once all of my results are in.
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="navigation">
+                <button type="button" class="nav-btn secondary" id="backBtn" onclick="goBack()" style="display: none;">Go Back</button>
+                <button type="button" class="nav-btn" id="resetBtn" onclick="resetForm()" style="background: linear-gradient(45deg, #ff6b6b, #ff4757); display: block;">Reset Form</button>
+                <button type="button" class="nav-btn" id="continueBtn" onclick="goNext()">Continue</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Load JavaScript modules in dependency order -->
+    <script src="js/config.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/timezone.js"></script>
+    <script src="js/characters.js"></script>
+    <script src="js/persistence.js"></script>
+    <script src="js/userCheck.js"></script>
+    <script src="js/submission.js"></script>
+    <script src="js/interactions.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

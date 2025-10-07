@@ -1,0 +1,52 @@
+/* === FORM ELEMENTS === */
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #f4e4c1;
+}
+
+.required {
+    background: rgba(218, 165, 32, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid #DAA520;
+}
+
+.required > label::after {
+    content: " *";
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #8B4513;
+    border-radius: 8px;
+    background: rgba(244, 228, 193, 0.1);
+    color: #f4e4c1;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(244, 228, 193, 0.6);
+    font-style: italic;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #DAA520;
+    background: rgba(244, 228, 193, 0.15);
+}

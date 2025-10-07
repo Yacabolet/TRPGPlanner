@@ -1,0 +1,11 @@
+/* === MESSAGES & NOTIFICATIONS === */
+
+.error-message {
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid rgba(244, 67, 54, 0.5);
+    color: #ffcdd2;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 0.9em;
+}

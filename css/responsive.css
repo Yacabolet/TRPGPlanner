@@ -1,0 +1,72 @@
+/* === RESPONSIVE DESIGN === */
+
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .header h1 {
+        font-size: 2em;
+    }
+    
+    .form-page {
+        padding: 20px;
+    }
+    
+    .timeslot-options {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .rating-inputs {
+        gap: 10px;
+    }
+    
+    .dual-rating {
+        grid-template-columns: 1fr;
+    }
+    
+    .character-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .navigation > * {
+        width: 100%;
+        max-width: none;
+    }
+    
+    .navigation #resetBtn {
+        margin: 0;
+        order: 3;
+    }
+    
+    .navigation #backBtn {
+        order: 1;
+    }
+    
+    .navigation #continueBtn {
+        order: 2;
+    }
+    
+    .flexibility-options {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .flexibility-options label {
+        min-width: auto;
+        font-size: 0.8em;
+        padding: 6px 12px;
+    }
+    
+    .tooltip {
+        width: 250px;
+        margin-left: -125px;
+        font-size: 0.75em;
+    }
+}
