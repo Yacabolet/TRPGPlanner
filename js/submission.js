@@ -71,6 +71,23 @@ function collectFormData() {
         console.warn('Could not retrieve character selections from localStorage:', e);
     }
     
+    // Convert arrays to comma-separated strings for Google Sheets compatibility
+    Object.keys(data).forEach(key => {
+        if (Array.isArray(data[key])) {
+            // Special handling for character preferences - convert IDs to readable names
+            if (key === 'preferredCharacters') {
+                const characterNames = data[key].map(id => {
+                    const character = premadeCharacters.find(char => char.id === id);
+                    return character ? character.name : id;
+                });
+                data[key] = characterNames.join(', ');
+            } else {
+                // For other arrays, just join with commas
+                data[key] = data[key].join(', ');
+            }
+        }
+    });
+    
     return data;
 }
 
