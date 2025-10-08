@@ -16,15 +16,15 @@ function checkCharacterBrowseNeeded() {
     
     if (characterCreation && (characterCreation.value === 'premade' || characterCreation.value === 'either')) {
         showCharacterBrowse = true;
-        totalPages = 8;
+        totalPages = 9; // Updated from 8 to 9
         populateCharacters();
-        console.log('Character browse enabled, totalPages set to 8');
+        console.log('Character browse enabled, totalPages set to 9');
     } else {
         showCharacterBrowse = false;
-        totalPages = 7;
-        const page7 = document.getElementById('page7');
-        page7.classList.remove('active');
-        console.log('Character browse disabled, totalPages set to 7');
+        totalPages = 8; // Updated from 7 to 8
+        const page8 = document.getElementById('page8');
+        page8.classList.remove('active');
+        console.log('Character browse disabled, totalPages set to 8');
     }
     
     if (previousShowCharacterBrowse !== showCharacterBrowse) {
@@ -88,10 +88,11 @@ function showPage(pageNum) {
     
     // Determine which page content to show
     let targetPageId;
-    if (pageNum === 7) {
-        targetPageId = showCharacterBrowse ? 'page7' : 'page8';
-    } else if (pageNum === 8 && showCharacterBrowse) {
-        targetPageId = 'page8';
+    if (pageNum === 8) {
+        // Page 8 is either character browse or preferences depending on showCharacterBrowse
+        targetPageId = showCharacterBrowse ? 'page8' : 'page9';
+    } else if (pageNum === 9 && showCharacterBrowse) {
+        targetPageId = 'page9';
     } else {
         targetPageId = `page${pageNum}`;
     }
@@ -102,12 +103,12 @@ function showPage(pageNum) {
         targetPage.classList.add('active');
         
         // Update double session question visibility
-        if (targetPageId === 'page8') {
+        if (targetPageId === 'page9') {
             updateDoubleSessionQuestion();
         }
         
         // Populate character grid
-        if (targetPageId === 'page7' && showCharacterBrowse) {
+        if (targetPageId === 'page8' && showCharacterBrowse) {
             populateCharacters();
         }
     } else {
@@ -149,10 +150,10 @@ function goNext() {
         }
     }
     
-    // Special handling for character preferences page
-    if (currentPage === 6) {
+    // Special handling for character preferences page (now page 7)
+    if (currentPage === 7) {
         checkCharacterBrowseNeeded();
-        currentPage = 7;
+        currentPage = 8;
         saveCurrentPage();
         showPage(currentPage);
         return;
@@ -171,10 +172,10 @@ function goNext() {
 function goBack() {
     if (currentPage > 1) {
         // Special handling for going back from different pages
-        if (currentPage === 7 && !showCharacterBrowse) {
-            currentPage = 6;
-        } else if (currentPage === 8 && showCharacterBrowse) {
+        if (currentPage === 8 && !showCharacterBrowse) {
             currentPage = 7;
+        } else if (currentPage === 9 && showCharacterBrowse) {
+            currentPage = 8;
         } else {
             currentPage--;
         }
@@ -188,7 +189,7 @@ function resetForm() {
     
     clearSavedData();
     currentPage = 1;
-    totalPages = 7;
+    totalPages = 8; // Updated from 7 to 8
     showCharacterBrowse = false;
     
     document.getElementById('recruitmentForm').reset();

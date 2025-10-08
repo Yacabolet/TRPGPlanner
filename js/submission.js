@@ -57,6 +57,20 @@ function collectFormData() {
     });
     Object.assign(data, checkboxGroups);
     
+    // IMPORTANT: Get character selections from localStorage since carousel only shows one at a time
+    try {
+        const savedData = localStorage.getItem('dnd_form_data');
+        if (savedData) {
+            const formData = JSON.parse(savedData);
+            // Include character selections from localStorage if they exist
+            if (formData.preferredCharacters && formData.preferredCharacters.length > 0) {
+                data.preferredCharacters = formData.preferredCharacters;
+            }
+        }
+    } catch (e) {
+        console.warn('Could not retrieve character selections from localStorage:', e);
+    }
+    
     return data;
 }
 

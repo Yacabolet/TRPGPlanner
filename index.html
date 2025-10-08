@@ -29,7 +29,7 @@
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
-            <div class="progress-text" id="progressText">Step 1 of 7</div>
+            <div class="progress-text" id="progressText">Step 1 of 8</div>
             <div class="auto-save-indicator">Progress automatically saved</div>
         </div>
 
@@ -175,8 +175,48 @@
                 </div>
             </div>
 
-            <!-- Page 4: Player Motivation & Style -->
+            <!-- Page 4: What's Special About Draw Steel? -->
             <div class="form-page" id="page4">
+                <h2>What's Special About Draw Steel?</h2>
+                
+                <div style="line-height: 1.8; opacity: 0.95;">
+                    <p style="margin-bottom: 20px;">
+                        If you've played or seen TRPGs like D&D 5e or Pathfinder then you have a certain set of expectations. Draw Steel is familiar in many superficial ways, but it was designed to address some problems often cited by people whove played these systems for a while, the following are some of those core differences!
+                    </p>
+                    
+                    <div style="background: rgba(244, 228, 193, 0.05); padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 3px solid #DAA520;">
+                        <h3 style="color: #DAA520; margin-bottom: 10px;">Every Action Counts</h3>
+                        <p>Every roll produces one of three outcomes (weak, standard, or strong) rather than success/failure. No more wasted turns—every action matters and moves combat forward.</p>
+                    </div>
+                    
+                    <div style="background: rgba(244, 228, 193, 0.05); padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 3px solid #DAA520;">
+                        <h3 style="color: #DAA520; margin-bottom: 10px;">Escalating Power, Higher Stakes</h3>
+                        <p>In most traditional fantasy systems the characters powers and abilities begin with maximum uses and deplete over the course of the adventuring day, incentivizing economy of resources and frequent resting. Rather than depleting resources, your character builds up power as your victories mount! Each Victory you earn grants more resources for your next encounter, and resources in encounters are "use them or lose them", creating a thrilling balancing act between the finite Stamina (Hit Points) and healing and the ever increasing power of characters!</p>
+                    </div>
+                    
+                    <div style="background: rgba(244, 228, 193, 0.05); padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 3px solid #DAA520;">
+                        <h3 style="color: #DAA520; margin-bottom: 10px;">Team-Based Initiative</h3>
+                        <p>Instead of randomly determined initiative, turn order alternates between players and enemies (barring special abilities) and the players decide which of them goes when! This gives players the freedom to coordinate team attacks and strategize on how to best tackle every situation.</p>
+                    </div>
+                    
+                    <div style="background: rgba(244, 228, 193, 0.05); padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 3px solid #DAA520;">
+                        <h3 style="color: #DAA520; margin-bottom: 10px;">Triggered Abilities</h3>
+                        <p>Every character has one or two triggers that usually involve the actions of their teammates, giving players a reason to stay focused on what's happening even when it isn't their turn.</p>
+                    </div>
+					
+					<div style="background: rgba(244, 228, 193, 0.05); padding: 20px; border-radius: 8px; border-left: 3px solid #DAA520;">
+                        <h3 style="color: #DAA520; margin-bottom: 10px;">Movement & Positioning</h3>
+                        <p>The system relies upon the use of a grid, and makes frequent use of both mobility actions and abilities which enable players to reposition their allies or enemies, with a core stat dedicated to resisting unwanted movement.</p>
+                    </div>
+                    
+                    <p style="margin-top: 25px; padding: 20px; background: rgba(218, 165, 32, 0.1); border-radius: 8px; text-align: center; font-style: italic;">
+                        In short, Draw Steel is designed for tactical combat and delivers a ruleset made to keep things engaging and keep incentives where they ought to be. If you enjoy games like D&D 4th Edition or tactical RPGs, this system might become a fast favorite!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Page 5: Player Motivation & Style -->
+            <div class="form-page" id="page5">
                 <h2>Player Motivation & Style</h2>
                 
                 <div class="form-group">
@@ -277,8 +317,8 @@
                 </div>
             </div>
 
-            <!-- Page 5: Safety & Boundaries -->
-            <div class="form-page" id="page5">
+            <!-- Page 6: Safety & Boundaries -->
+            <div class="form-page" id="page6">
                 <h2>Safety & Boundaries</h2>
                 
                 <div class="form-group">
@@ -344,8 +384,8 @@
                 </div>
             </div>
 
-            <!-- Page 6: Character Preferences -->
-            <div class="form-page" id="page6">
+            <!-- Page 7: Character Preferences -->
+            <div class="form-page" id="page7">
                 <h2>Character Preferences</h2>
                 
                 <div class="form-group">
@@ -401,27 +441,23 @@
                 </div>
             </div>
 
-            <!-- Page 7: Character Browse (Conditional) -->
-            <div class="form-page" id="page7">
+            <!-- Page 8: Character Browse (Conditional) -->
+            <div class="form-page" id="page8">
                 <h2>Browse Premade Characters</h2>
                 
-                <p style="margin-bottom: 20px;">Here are the available premade characters. You can select your preferences, or leave all unselected if none particularly interest you.</p>
+                <p style="margin-bottom: 20px;">Here are the available premade characters. Use the arrows to browse through them, and check the box on any characters that interest you.</p>
                 
                 <div class="character-grid" id="characterGrid">
-                    <div class="character-placeholder">
-                        Premade character options will be displayed here once you provide the character details.
-                        <br><br>
-                        For now, this page serves as a placeholder to demonstrate the workflow.
-                    </div>
+                    <!-- Characters will be populated by JavaScript -->
                 </div>
                 
                 <div class="note" style="margin-top: 20px;">
-                    You can select multiple characters that interest you, or proceed without selections if you'd prefer to create your own character after all.
-                </div>
+					You can select multiple characters that interest you by checking the box on each one as you browse. Your selections will be saved as you navigate. You can also proceed without selections if you'd prefer to create your own character after all.
+				</div>
             </div>
 
-            <!-- Page 8: Preferences and Expectations -->
-            <div class="form-page" id="page8">
+            <!-- Page 9: Preferences and Expectations -->
+            <div class="form-page" id="page9">
                 <h2>Preferences and Expectations</h2>
                 <p style="margin-bottom: 25px; opacity: 0.9;">Please rank the following on a 1-5 scale:</p>
                 
