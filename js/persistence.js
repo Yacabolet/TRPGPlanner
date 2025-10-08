@@ -7,7 +7,17 @@ function setupFormPersistence() {
 }
 
 function saveFormData() {
-    const formData = {};
+    // IMPORTANT: Read existing data first to preserve character selections
+    let formData = {};
+    try {
+        const savedData = localStorage.getItem('dnd_form_data');
+        if (savedData) {
+            formData = JSON.parse(savedData);
+        }
+    } catch (e) {
+        console.warn('Could not read existing form data:', e);
+    }
+    
     const form = document.getElementById('recruitmentForm');
     
     // Save text inputs and textareas
@@ -24,9 +34,12 @@ function saveFormData() {
         if (radio.name) formData[radio.name] = radio.value;
     });
     
-    // Save checkboxes
+    // Save checkboxes (but preserve preferredCharacters which is handled separately)
     const checkboxGroups = {};
     form.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+        // Skip character checkboxes - they're handled by saveCharacterSelection()
+        if (checkbox.name === 'preferredCharacters') return;
+        
         if (checkbox.name) {
             if (!checkboxGroups[checkbox.name]) checkboxGroups[checkbox.name] = [];
             checkboxGroups[checkbox.name].push(checkbox.value);
